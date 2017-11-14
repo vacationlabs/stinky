@@ -6,6 +6,15 @@ maintainer: admin@vacationlabs.com
 copyright: 2017, Vacation Labs
 license: BSD3
 github: vacationlabs/stinky
+default-extensions:
+  - ScopedTypeVariables
+  - LambdaCase
+  - QuasiQuotes
+  - TemplateHaskell
+  - FunctionalDependencies
+  - OverloadedStrings
+  - FlexibleInstances
+  - FlexibleContexts
 extra-source-files:
 - README.md
 dependencies:
@@ -16,6 +25,9 @@ library:
   - Lib
   dependencies:
   - base >=4.7 && <5
+  - lucid
+  - text
+  - interpolatedstring-perl6
 executables:
   stinky-exe:
     main: Main.hs
