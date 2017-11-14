@@ -1,0 +1,40 @@
+name: stinky
+version: '0.1.0.0'
+category: Web
+author: Vacation Labs
+maintainer: admin@vacationlabs.com
+copyright: 2017, Vacation Labs
+license: BSD3
+github: vacationlabs/stinky
+extra-source-files:
+- README.md
+dependencies:
+- hpack
+library:
+  source-dirs: src
+  exposed-modules:
+  - Lib
+  dependencies:
+  - base >=4.7 && <5
+executables:
+  stinky-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - stinky
+tests:
+  stinky-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - base
+    - stinky
