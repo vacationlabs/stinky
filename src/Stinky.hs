@@ -1,9 +1,9 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Stinky
-  (
-    module Stinky
-  , module Lucid
-  )
-where
+  ( module Lucid
+  , module Stinky
+  ) where
 
 import Lucid hiding (button_)
 import Lucid.Base hiding (button_)
@@ -124,7 +124,7 @@ spacer_ size = table_ [class_ " spacer "] $ do
       td_ ([height_ [qc|{size}px|], style_ [qc|font-size:{size}px; line-height:{size}px;|]]) ""
 
 customHr_ :: (Monad m) => HtmlT m ()
-customHr_ =   row_ (with columns_ [class_ " first last "] (hr_ []))
+customHr_ = row_ $ with columns_ [class_ " first last "] (hr_ [])
 
 type Preheader = Text
 
@@ -145,14 +145,17 @@ emailLayout_ inlineStyles subject preheader bodyContent = doctypehtml_ $ do
           center_ bodyContent
 
 singleColumn_ :: (Monad m) => HtmlT m () -> HtmlT m ()
-singleColumn_ inner = row_ $ do
-  with columns_ [class_ " first last "] inner
+singleColumn_ inner = row_ $ with columns_ [class_ " first last "] inner
 
 firstColumn_ :: (Monad m) => HtmlT m () -> HtmlT m ()
-firstColumn_ inner = with columns_ [class_ " first "] inner
+firstColumn_ inner = with columns_ [class_ "first "] inner
 
 lastColumn_ :: (Monad m) => HtmlT m () -> HtmlT m ()
 lastColumn_ inner = with columns_ [class_ " last "] inner
+
+mkLarge :: Int -> Attribute
+mkLarge i = class_ $ "large-" <> (T.pack $ show i) <> " small-12"
+  -- [makeAttribute "large" (T.pack $ show i), makeAttribute "small" "12"]
 
 
 -- sendTestEmail :: (HasSendgrid m, HasLogging m) => Text -> m ()
