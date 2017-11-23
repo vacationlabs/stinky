@@ -37,11 +37,34 @@ container_ arg = table_ [align_ "center", class_ " container "] $ do
     tr_ $ do
       td_ arg
 
+{-
+-- | @p@ element
+p_ :: Term arg result => arg -> result
+p_ = term "p"
+-}
+
 row_ :: (Monad m) => HtmlT m () -> HtmlT m ()
 row_ arg = table_ [class_ " row "] $ do
   tbody_ $ do
     tr_ arg
 
+{-
+row2_ :: Term arg result => arg -> result
+row2_ arg = table_ [class_ " row "] $ do
+  tbody_ $ do
+    tr_ arg
+-}
+
+-- count children
+{-
+col_count = component.parent.elements.size
+
+      small_val = component.attr('small')
+      large_val = component.attr('large')
+
+      small_size = small_val || column_count
+large_size = large_val || small_val || (column_count / col_count).to_i
+-}
 
 columns_ :: (Monad m) => HtmlT m () -> HtmlT m ()
 columns_ arg = th_ [class_ " columns "] $ do
@@ -104,7 +127,9 @@ customHr_ :: (Monad m) => HtmlT m ()
 customHr_ =   row_ (with columns_ [class_ " first last "] (hr_ []))
 
 type Preheader = Text
+
 type InlineStyles = Text
+
 emailLayout_ :: (Monad m) => Text -> Subject -> Preheader -> HtmlT m () -> HtmlT m ()
 emailLayout_ inlineStyles subject preheader bodyContent = doctypehtml_ $ do
   head_ $ do
